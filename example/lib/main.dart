@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:audioplayers/audioplayers.dart';
 import "package:cached_network_image/cached_network_image.dart";
-
+import 'package:flutter_decorated_text/flutter_decorated_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+Future<void> goToUrl(String url) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
+  }
+}
 class MyHomePage extends StatefulWidget {
   final String title;
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -103,13 +108,25 @@ class _MyHomePageState extends State<MyHomePage> {
                   delivered: true,
                 ),
                 BubbleSpecialOne(
-                  text: 'bubble special one with tail',
+                  text: 'https://www.yallakora.com/',
                   isSender: false,
                   color: Color(0xFF1B97F3),
                   textStyle: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                   ),
+                  textAlign: TextAlign.left,
+                  decorationRules: [
+                    DecoratorRule.url(
+                        style: TextStyle(color: Colors.redAccent),
+                        onTap: (url){
+                          goToUrl(url);
+                        }
+                    )
+                  ],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 DateChip(
                   date: new DateTime(now.year, now.month, now.day - 1),
@@ -118,6 +135,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   text: 'bubble special one with tail',
                   color: Color(0xFFE8E8EE),
                   seen: true,
+                  textAlign: TextAlign.left,
+                  decorationRules: [
+                    DecoratorRule.url(
+                        style: TextStyle(color: Colors.blue),
+                        onTap: (url){
+                          goToUrl(url);
+                        }
+                    )
+                  ],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialOne(
                   text: 'bubble special one without tail',
@@ -128,12 +157,29 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 20,
                     color: Colors.black,
                   ),
+                  textAlign: TextAlign.left,
+                  decorationRules: [
+                    DecoratorRule.url(
+                        style: TextStyle(color: Colors.blue),
+                        onTap: (url){
+                          goToUrl(url);
+                        }
+                    )
+                  ],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialOne(
                   text: 'bubble special one without tail',
                   tail: false,
                   color: Color(0xFFE8E8EE),
                   sent: true,
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialTwo(
                   text: 'bubble special tow with tail',
@@ -143,6 +189,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 20,
                     color: Colors.black,
                   ),
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 DateChip(
                   date: now,
@@ -152,6 +203,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   isSender: true,
                   color: Color(0xFFE8E8EE),
                   sent: true,
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialTwo(
                   text: 'bubble special tow without tail',
@@ -162,36 +218,66 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 20,
                     color: Colors.black,
                   ),
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialTwo(
                   text: 'bubble special tow without tail',
                   tail: false,
                   color: Color(0xFFE8E8EE),
                   delivered: true,
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialThree(
                   text: 'bubble special three without tail',
                   color: Color(0xFF1B97F3),
                   tail: false,
                   textStyle: TextStyle(color: Colors.white, fontSize: 16),
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialThree(
                   text: 'bubble special three with tail',
                   color: Color(0xFF1B97F3),
                   tail: true,
                   textStyle: TextStyle(color: Colors.white, fontSize: 16),
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialThree(
                   text: "bubble special three without tail",
                   color: Color(0xFFE8E8EE),
                   tail: false,
                   isSender: false,
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 BubbleSpecialThree(
                   text: "bubble special three with tail",
                   color: Color(0xFFE8E8EE),
                   tail: true,
                   isSender: false,
+                  textAlign: TextAlign.left,
+                  decorationRules: [],
+                  deliveryColor: Colors.red,
+                  seenColor: Colors.green,
+                  sentColor: Colors.blue,
                 ),
                 SizedBox(
                   height: 100,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_decorated_text/flutter_decorated_text.dart';
 
 ///New special chat bubble type
 ///
@@ -18,7 +19,11 @@ class BubbleSpecialTwo extends StatelessWidget {
   final bool delivered;
   final bool seen;
   final TextStyle textStyle;
-
+  final Color deliveryColor;
+  final Color seenColor;
+  final Color sentColor;
+  final TextAlign textAlign;
+  final List<DecoratorRule> decorationRules;
   const BubbleSpecialTwo({
     Key? key,
     this.isSender = true,
@@ -32,6 +37,11 @@ class BubbleSpecialTwo extends StatelessWidget {
       color: Colors.black87,
       fontSize: 16,
     ),
+    required this.deliveryColor,
+    required this.seenColor,
+    required this.sentColor,
+    required this.textAlign,
+    required this.decorationRules,
   }) : super(key: key);
 
   ///chat bubble builder method
@@ -44,7 +54,7 @@ class BubbleSpecialTwo extends StatelessWidget {
       stateIcon = Icon(
         Icons.done,
         size: 18,
-        color: Color(0xFF97AD8E),
+        color: sentColor ,
       );
     }
     if (delivered) {
@@ -52,7 +62,7 @@ class BubbleSpecialTwo extends StatelessWidget {
       stateIcon = Icon(
         Icons.done_all,
         size: 18,
-        color: Color(0xFF97AD8E),
+        color: deliveryColor,
       );
     }
     if (seen) {
@@ -60,7 +70,7 @@ class BubbleSpecialTwo extends StatelessWidget {
       stateIcon = Icon(
         Icons.done_all,
         size: 18,
-        color: Color(0xFF92DEDA),
+        color: seenColor,
       );
     }
 
@@ -88,10 +98,11 @@ class BubbleSpecialTwo extends StatelessWidget {
                   padding: stateTick
                       ? EdgeInsets.only(right: 20)
                       : EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-                  child: Text(
-                    text,
+                  child: DecoratedText(
+                    text: text,
                     style: textStyle,
-                    textAlign: TextAlign.left,
+                    textAlign: textAlign,
+                    rules: decorationRules,
                   ),
                 ),
                 stateIcon != null && stateTick
