@@ -22,6 +22,8 @@ class BubbleSpecialTwo extends StatelessWidget {
   final Color deliveryColor;
   final Color seenColor;
   final Color sentColor;
+  final int? maxLines;
+  final TextOverflow? textOverflow;
   final TextAlign textAlign;
   final List<DecoratorRule> decorationRules;
   const BubbleSpecialTwo({
@@ -42,6 +44,8 @@ class BubbleSpecialTwo extends StatelessWidget {
     required this.sentColor,
     required this.textAlign,
     required this.decorationRules,
+    this.maxLines,
+    this.textOverflow
   }) : super(key: key);
 
   ///chat bubble builder method
@@ -101,6 +105,8 @@ class BubbleSpecialTwo extends StatelessWidget {
                   child: DecoratedText(
                     text: text,
                     style: textStyle,
+                    maxLines: maxLines,
+                    overflow: textOverflow,
                     textAlign: textAlign,
                     rules: decorationRules,
                   ),
